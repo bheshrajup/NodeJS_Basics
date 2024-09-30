@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CRUD Application</title>
+</head>
+<body>
+    <h1>CRUD Application</h1>
+    <form id="itemForm">
+        <input type="hidden" id="itemId"> <!-- Hidden field for the item ID -->
+        <input type="text" id="name" placeholder="Item Name" required>
+        <input type="number" id="price" placeholder="Item Price" required>
+        <button type="submit">Add Item</button>
+    </form>
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Items will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('itemForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('itemId').value; // Get item ID
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+
+            if (id) {
+                // Update item if ID exists
+                await fetch('/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id, name, price }),
+                });
+            } else {
+                // Create new item
+                await fetch('/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, price }),
+                });
+            }
+
+            // Clear the form
+            document.getElementById('itemId').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('price').value = '';
+            loadItems(); // Refresh the table
+        });
+
+        const loadItems = async () => {
+            const response = await fetch('/items');
+            const items = await response.json();
+            const tbody = document.querySelector('#itemTable tbody');
+            tbody.innerHTML = ''; // Clear existing table rows
+
+            items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editItem(${item.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        };
+
+        const deleteItem = async (id) => {
+            await fetch('/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id }),
+            });
+            loadItems(); // Refresh the table
+        };
+
+        const editItem = async (id) => {
+            const response = await fetch(`/item/${id}`);
+            const item = await response.json();
+            document.getElementById('itemId').value = item.id; // Fill the hidden ID field
+            document.getElementById('name').value = item.name; // Fill the name field
+            document.getElementById('price').value = item.price; // Fill the price field
+        };
+
+        // Load items when the page loads
+        loadItems();
+    </script>
+</body>
+</html>

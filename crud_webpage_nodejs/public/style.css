@@ -1,0 +1,132 @@
+/* General page styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+form input, form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+form input:focus {
+    border-color: #4CAF50; /* Change border color on focus */
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Button styles for update and delete */
+.edit-btn, .delete-btn {
+    padding: 8px 12px;  /* Adjusted padding for smaller buttons */
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.edit-btn {
+    background-color: #2196F3; /* Blue color */
+}
+
+.edit-btn:hover {
+    background-color: #0b7dda; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly grow button */
+}
+
+.delete-btn {
+    background-color: #f44336; /* Red color */
+    padding: 8px 10px; /* Slightly less padding for the delete button */
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly grow button */
+}
+
+/* Table styles */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+table tr:last-child td {
+    border-bottom: none; /* Remove bottom border from last row */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+
+    form {
+        width: 95%;
+    }
+
+    form input, form button {
+        font-size: 14px;
+    }
+}
