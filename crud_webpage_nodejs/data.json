@@ -1,12 +1,17 @@
 [
   {
-    "id": 1,
-    "name": "Travel",
-    "price": "1600"
+    "id": 3,
+    "name": "<h1> Hello</h1>",
+    "price": "200"
   },
   {
-    "id": 2,
-    "name": "Food",
-    "price": "500"
+    "id": 4,
+    "name": "<script> alert(\"XSS\");</script>",
+    "price": "100"
+  },
+  {
+    "id": 5,
+    "name": "<body onload=alert(\"XSS\")>",
+    "price": "11"
   }
 ]
