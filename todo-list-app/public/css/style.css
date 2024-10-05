@@ -1,0 +1,204 @@
+/* styles.css */
+
+/* General styles for body and container */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+/* Centered heading style for the main title */
+h1 {
+    color: #343a40;
+    font-size: 36px;
+    margin-top: 20px; /* Space from the top */
+    margin-bottom: 40px; /* Space below the title */
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Styles for the container */
+.container {
+    background-color: #ffffff;
+    width: 50%; /* Increased width of the container */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Add New Task heading */
+.container h1 {
+    margin-bottom: 20px;
+}
+
+/* Form styles for task input and button */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    text-align: left;
+    color: #495057;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="date"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 400px;
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+    border-color: #5cb85c;
+}
+
+button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #5cb85c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: -8px;
+}
+
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+/* Styles for the view task list button */
+.view-task-list-btn {
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 20px; /* Space above the button */
+    background-color: white; /* Bootstrap primary color */
+    color: black;
+    border: #4cae4c solid 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-task-list-btn:hover {
+    background-color: #4cae4c; /* Darker shade on hover */
+}
+
+/* Additional responsive styling */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 80%;
+    }
+}
+
+/* Additional styles for the task list table */
+#task-list-container {
+    width: 100%;
+    margin-top: 20px; /* Space above the table */
+}
+
+/* Style for the table */
+table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Remove space between borders */
+    margin-top: 20px; /* Space above the table */
+    font-size: 18px; /* Increase font size for better readability */
+}
+
+/* Table headers styling */
+thead {
+    background-color: #5cb85c; /* Header background color */
+    color: white; /* Header text color */
+}
+
+th {
+    padding: 20px; /* Increase header padding */
+    text-align: left; /* Align header text to the left */
+    font-weight: bold;
+    border-bottom: 2px solid #4cae4c; /* Bottom border for header */
+}
+
+/* Table body row styling */
+tbody tr {
+    background-color: #ffffff; /* White background for rows */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+/* Table cell styling */
+td {
+    padding: 15px; /* Increase cell padding for a bigger appearance */
+    border-bottom: 1px solid #ced4da; /* Bottom border for rows */
+    text-align: left; /* Align cell text to the left */
+}
+
+table thead th:last-child{
+    text-align: right;
+    padding-right: 10px;
+}
+
+table tbody tr td:last-child{
+    text-align: right;
+    padding-right: 15px;
+}
+
+
+/* table tbody tr td:last-child {
+    text-align: right;
+} */
+/* Action buttons styling */
+.edit-btn, .delete-btn {
+    padding: 10px 15px; /* Slightly increase button padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 5px; /* Space between buttons */
+}
+
+.edit-btn {
+    background-color: #5cb85c; /* Edit button color */
+    color: white; /* Edit button text color */
+}
+
+.edit-btn:hover {
+    background-color: #4cae4c; /* Darker shade on hover */
+}
+
+.delete-btn {
+    background-color: #d9534f; /* Delete button color */
+    color: white; /* Delete button text color */
+}
+
+.delete-btn:hover {
+    background-color: #c9302c; /* Darker shade on hover */
+}
+
+/* Responsive styling for table */
+@media screen and (max-width: 768px) {
+    #task-list-container {
+        width: 100%;
+        overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+    }
+}

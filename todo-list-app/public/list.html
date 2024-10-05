@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        
+        <!-- Task List -->
+        <div id="task-list-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="task-table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- Edit Task Form -->
+        <div id="edit-form" style="display:none;">
+            <h2>Edit Task</h2>
+            <form id="task-edit-form">
+                <label for="edit-task">Task:</label>
+                <input type="text" id="edit-task" required>
+                <label for="edit-date">Due Date:</label>
+                <input type="date" id="edit-date" required>
+                <button type="submit">Update Task</button>
+                <button type="button" id="cancel-edit">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const taskTableBody = document.getElementById('task-table-body');
+        const editForm = document.getElementById('edit-form');
+        const editTaskInput = document.getElementById('edit-task');
+        const editDateInput = document.getElementById('edit-date');
+        const cancelEditButton = document.getElementById('cancel-edit');
+        let tasks = [];
+        let editingTaskIndex = null;
+
+        // Fetch tasks from the server
+        fetch('/tasks')
+            .then(response => response.json())
+            .then(data => {
+                tasks = data;
+                renderTasks();
+            });
+
+        function renderTasks() {
+            taskTableBody.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${task.task}</td>
+                    <td>${task.date}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editTask(${index})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
+                    </td>
+                `;
+                taskTableBody.appendChild(row);
+            });
+        }
+
+        function editTask(index) {
+            editingTaskIndex = index; // Set the editing task index
+            editTaskInput.value = tasks[index].task; // Fill the input with current task
+            editDateInput.value = tasks[index].date; // Fill the input with current date
+            
+            // Hide the task list and show the edit form
+            document.getElementById('task-list-container').style.display = 'none';
+            editForm.style.display = 'block';
+        }
+
+        function deleteTask(index) {
+            fetch(`/tasks/${index}`, { method: 'DELETE' })
+                .then(() => {
+                    tasks.splice(index, 1); // Remove from local tasks array
+                    renderTasks();
+                });
+        }
+
+        // Update task when form is submitted
+        document.getElementById('task-edit-form').onsubmit = (e) => {
+            e.preventDefault();
+            const updatedTask = {
+                task: editTaskInput.value,
+                date: editDateInput.value
+            };
+            fetch(`/tasks/${editingTaskIndex}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTask)
+            })
+            .then(() => {
+                tasks[editingTaskIndex] = updatedTask; // Update local tasks array
+                renderTasks();
+                editForm.style.display = 'none'; // Hide the edit form after updating
+                document.getElementById('task-list-container').style.display = 'block'; // Show task list again
+                editingTaskIndex = null; // Reset editing index
+            });
+        };
+
+        // Cancel edit
+        cancelEditButton.onclick = () => {
+            editForm.style.display = 'none'; // Hide the edit form
+            document.getElementById('task-list-container').style.display = 'block'; // Show task list again
+            editingTaskIndex = null; // Reset editing index
+        };
+    </script>
+</body>
+</html>
