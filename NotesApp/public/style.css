@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light gray background */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height for vertical centering */
+}
+
+.container {
+    width: 400px; /* Set a fixed width for the container */
+    background-color: white; /* White background for the notes area */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px; /* Padding inside the container */
+}
+
+h1 {
+    color: #333; /* Dark color for the heading */
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+form {
+    margin-bottom: 20px; /* Space below the form */
+}
+
+textarea {
+    width: 100%; /* Full width for the textarea */
+    height: 100px; /* Fixed height for the textarea */
+    padding: 10px; /* Padding inside the textarea */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    resize: none; /* Disable resizing of the textarea */
+}
+
+button {
+    background-color: #28a745; /* Green background for buttons */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding inside buttons */
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    width: 100%; /* Full-width button */
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+h2 {
+    margin-top: 20px; /* Space above the subheading */
+    text-align: center; /* Center the subheading */
+}
+
+ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding from the list */
+}
+
+li {
+    background-color: #f8f9fa; /* Light background for list items */
+    padding: 15px; /* Padding inside list items */
+    margin-bottom: 10px; /* Space below each list item */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Center items vertically */
+}
+
+li form {
+    margin: 0; /* Remove margin for the delete form */
+}
+
+li button {
+    background-color: #dc3545; /* Red color for delete button */
+    padding: 8px 10px; /* Padding for delete button */
+}
+
+li button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
